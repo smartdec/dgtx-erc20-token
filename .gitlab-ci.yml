@@ -1,0 +1,29 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:carbon
+
+
+cache:
+  paths:
+  - node_modules/
+
+build:
+  stage: build
+  script:
+   - npm install
+   - npm run truffle compile
+
+test:
+  stage: test
+  script:
+   - npm install
+   - npm test
+
+test:coverage:
+  stage: test
+  allow_failure: true
+  script:
+   - npm install
+   - npm run coverage
+  coverage: '/All files      \|    (\d+.\d+)/'
